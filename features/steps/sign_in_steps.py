@@ -1,7 +1,6 @@
 from time import sleep
 from behave import given, when, then
 
-
 @given('Open main page and login')
 def main_page(context):
     # Navigate to the URL

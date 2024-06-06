@@ -21,6 +21,7 @@ def browser_init(context):
     driver = webdriver.Chrome(service=service, options=chrome_options)
     driver.maximize_window()
 
+    ### FIREFOX ###
     # driver_path = GeckoDriverManager().install()
     # service = Service(driver_path)
     # context.driver = webdriver.Firefox(service=service)
@@ -40,12 +41,11 @@ def browser_init(context):
   #  service=service
 #)
 
-def before_all(context):
+def before_scenario(context, scenario):
     # Get the path to the ChromeDriver executable
 
-    context.driver = get_driver(context.config.driver)
-    context.URL = context.config.URL
-    driver = webdriver.Chrome(executable_path = '/Users/svetlanalevinsohn/careerist/18-python-selenium-automation/geckodriver')
+    driver = webdriver.Chrome(
+        executable_path='/Users/svetlanalevinsohn/careerist/18-python-selenium-automation/geckodriver')
     driver_path = ChromeDriverManager().install()
 
     chrome_options = Options()
@@ -55,14 +55,12 @@ def before_all(context):
     service = Service(driver_path)
     driver = webdriver.Chrome(service=service, options=chrome_options)
     driver.maximize_window()
-def after_all(context):
-    context.driver.quit()
 
-
-def before_scenario(context, scenario):
     pass
 
 
 def after_scenario(context, scenario):
+
+    context.driver.quit()
     pass
 
