@@ -25,29 +25,29 @@ def browser_init(context):
     #context.driver = webdriver.Firefox(service=service)
 
     ### HEADLESS MODE ####
-   # options = webdriver.ChromeOptions()
-   #options.add_argument('headless')
-   # service = Service(ChromeDriverManager().install())
-   # context.driver = webdriver.Chrome(
-   #     options=options,
-   #     service=service
-   # )
+    # options = webdriver.ChromeOptions()
+    #options.add_argument('headless')
+    # service = Service(ChromeDriverManager().install())
+    # context.driver = webdriver.Chrome(
+    #     options=options,
+    #     service=service
+    # )
 
     ### BROWSERSTACK ###
     # Register for BrowserStack, then grab it from https://www.browserstack.com/accounts/settings
-    bs_user = 'brianthompson_QjCRxc'
-    bs_key = 'syDNvJAqWUVmUcXs2bWm'
-    url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
+    #bs_user = 'brianthompson_QjCRxc'
+    #bs_key = 'syDNvJAqWUVmUcXs2bWm'
+    #url = f'https://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
     #
-    options: Options = Options()
-    bstack_options = {
-         'osVersion': '13.0',
-         'deviceName': 'Samsung Galaxy S23',
-         'browserName': 'chrome',
-         'sessionName': 'Internship_Test_Case_1'
-     }
-    options.set_capability('bstack:options', bstack_options)
-    context.driver = webdriver.Remote(command_executor=url, options=options)
+    #options: Options = Options()
+    #bstack_options = {
+    #    'osVersion': '13.0',
+    #    'deviceName': 'Samsung Galaxy S23',
+    #    'browserName': 'chrome',
+    #    'sessionName': 'Internship_Test_Case'
+    #}
+    #options.set_capability('bstack:options', bstack_options)
+    #context.driver = webdriver.Remote(command_executor=url, options=options)
 
     context.driver.maximize_window()
 
@@ -57,16 +57,20 @@ def browser_init(context):
 
     context.app = Application(context.driver)
 
+
 def before_scenario(context, scenario):
     print('\nStarted scenario: ', scenario.name)
     browser_init(context)
 
+
 def before_step(context, step):
     print('\nStarted step: ', step)
+
 
 def after_step(context, step):
     if step.status == 'failed':
         print('\nStep failed: ', step)
+
 
 def after_scenario(context, feature):
     context.driver.delete_all_cookies()
