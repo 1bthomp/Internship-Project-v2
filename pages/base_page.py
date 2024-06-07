@@ -1,6 +1,7 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 class Page:
 
     def __init__(self, driver):
@@ -16,8 +17,12 @@ class Page:
     def find_elements(self, *locator):
         return self.driver.find_elements(*locator)
 
+    def click(self, *locator):
+        return self.driver.find_element(*locator).click()
+
     def input_text(self, *locator, text):
         return self.driver.find_element(*locator).send_keys(text)
+
     def wait_until_clickable_click(self, *locator):
         self.wait.until(
             EC.element_to_be_clickable(locator),
@@ -42,11 +47,11 @@ class Page:
         print('ALL windows:', self.driver.window_handles)
         return current_window
 
- #      self.wait.until(EC.new_window_is_opened)
-  #      all_windows = self.driver.window_handles  # [Win1, Win2, ...]
-   #     print('ALL windows:', self.driver.window_handles)
+    #      self.wait.until(EC.new_window_is_opened)
+    #      all_windows = self.driver.window_handles  # [Win1, Win2, ...]
+    #     print('ALL windows:', self.driver.window_handles)
     #    print('Switching to... ', all_windows[1])
-     #   self.driver.switch_to.window(all_windows[1])
+    #   self.driver.switch_to.window(all_windows[1])
 
     def verify_text(self, expected_text, *locator):
         actual_text = self.find_element(*locator).text
@@ -68,3 +73,5 @@ class Page:
     def close(self):
         self.driver.close()
 
+    def scroll_down(self):
+        self.driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
