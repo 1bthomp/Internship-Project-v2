@@ -23,3 +23,5 @@ class sign_in_page(Page):
     def click_settings(self):
         self.click(*self.settings)
         sleep(4)
+
+    #used for sign_in_steps along with verify_page
