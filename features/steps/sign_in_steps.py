@@ -21,13 +21,11 @@ def main_page(context):
     context.app.sign_in_page.click_continue()
     sleep(4)
 
-
 @when('Click on settings, subscription and payment options')
 def settings_subs_payment(context):
     #Click settings (uncomment if needed)
     context.app.sign_in_page.click_settings()
     sleep(4)
-
 
 @then('Verify subscription, back button, and upgrade plan')
 def verification(context):
