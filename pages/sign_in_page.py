@@ -17,9 +17,9 @@ class sign_in_page(Page):
         self.input_text(*self.search_bar_2, text="@qqD9Kfkpymn5Fb")
 
     def click_continue(self):
-        self.click(*self.continue_button)
-        sleep(4)
+        sleep(2)
+        self.wait_until_clickable_click(*self.continue_button)
 
     def click_settings(self):
-        self.click(*self.settings)
-        sleep(4)
+        sleep(2)
+        self.wait_until_clickable_click(*self.settings)

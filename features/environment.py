@@ -4,6 +4,9 @@ from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.firefox import GeckoDriverManager
+import pytest
+import allure
+
 
 from app.application import Application
 
@@ -12,9 +15,9 @@ def browser_init(context):
     """
     :param context: Behave context
     """
-    driver_path = ChromeDriverManager().install()
-    service = Service(driver_path)
-    context.driver = webdriver.Chrome(service=service)
+    #driver_path = ChromeDriverManager().install()
+    #service = Service(driver_path)
+    #context.driver = webdriver.Chrome(service=service)
 
     #driver_path = GeckoDriverManager().install()
     #service = Service(driver_path)
@@ -35,23 +38,24 @@ def browser_init(context):
 
     ### BROWSERSTACK ###
     # Register for BrowserStack, then grab it from https://www.browserstack.com/accounts/settings
-    #bs_user = 'brianthompson_QjCRxc'
-    #bs_key = 'syDNvJAqWUVmUcXs2bWm'
-    #url = f'https://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
+    bs_user = 'brianthompson_QjCRxc'
+    bs_key = 'syDNvJAqWUVmUcXs2bWm'
+    url = f'https://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
     #
-    #options: Options = Options()
-    #bstack_options = {
-    #    'osVersion': '13.0',
-    #    'deviceName': 'Samsung Galaxy S23',
-    #    'browserName': 'chrome',
-    #    'sessionName': 'Internship_Test_Case'
-    #}
-    #options.set_capability('bstack:options', bstack_options)
-    #context.driver = webdriver.Remote(command_executor=url, options=options)
+    options: Options = Options()
+    bstack_options = {
+        'os': 'OS X',
+        'osVersion': 'Sonoma',
+        'browserName': 'chrome',
+        'sessionName': 'Internship_Test_Case'
+    }
+    options.set_capability('bstack:options', bstack_options)
+    context.driver = webdriver.Remote(command_executor=url, options=options)
 
-    context.driver.maximize_window()
+    #context.driver.maximize_window()
 
-    context.driver.maximize_window()
+    #context.driver.maximize_window()
+    context.driver.set_window_size(1920, 1080)
     context.driver.implicitly_wait(4)
     context.wait = WebDriverWait(context.driver, 10)
 
