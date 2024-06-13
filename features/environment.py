@@ -12,9 +12,9 @@ def browser_init(context):
     """
     :param context: Behave context
     """
-    #driver_path = ChromeDriverManager().install()
-    #service = Service(driver_path)
-    #context.driver = webdriver.Chrome(service=service)
+    # driver_path = ChromeDriverManager().install()
+    # service = Service(driver_path)
+    # context.driver = webdriver.Chrome(service=service)
 
     #driver_path = GeckoDriverManager().install()
     #service = Service(driver_path)
@@ -35,24 +35,35 @@ def browser_init(context):
 
     ### BROWSERSTACK ###
     # Register for BrowserStack, then grab it from https://www.browserstack.com/accounts/settings
-    bs_user = 'brianthompson_QjCRxc'
-    bs_key = 'syDNvJAqWUVmUcXs2bWm'
-    url = f'https://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
+    #bs_user = 'brianthompson_QjCRxc'
+    #bs_key = 'syDNvJAqWUVmUcXs2bWm'
+    # url = f'https://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
     #
-    options: Options = Options()
-    bstack_options = {
-        'os': 'OS X',
-        'osVersion': 'Sonoma',
-        'browserName': 'chrome',
-        'sessionName': 'Internship_Test_Case'
-    }
-    options.set_capability('bstack:options', bstack_options)
-    context.driver = webdriver.Remote(command_executor=url, options=options)
+    # options: Options = Options()
+    # bstack_options = {
+    #     'os':'Android',
+    #     'osVersion': '13.0',
+    #     'browserName': 'Chrome',
+    #     'browserVersion': '120.0',
+    #     'deviceName': 'samsung galaxy s22',
+    #     'deviceOrientation': 'portrait',
+    #     'sessionName': 'Internship_Test_Case'
+    # }
+    # options.set_capability('bstack:options', bstack_options)
+    # context.driver = webdriver.Remote(command_executor=url, options=options)
+
+    mobile_emulation = {
+        "deviceMetrics": {"width": 360, "height": 640, "pixelRatio": 3.0},
+        "userAgent": "Mozilla/5.0 (Linux; Android 4.2.1; en-us; Nexus 5 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19",
+        "clientHints": {"platform": "Android", "mobile": True}}
+    chrome_options = Options()
+    chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
+    context.driver = webdriver.Chrome(options=chrome_options)
 
     #context.driver.maximize_window()
 
-    #context.driver.maximize_window()
-    context.driver.set_window_size(1920, 1080)
+    # context.driver.maximize_window()
+    # context.driver.set_window_size(400, 726)
     context.driver.implicitly_wait(4)
     context.wait = WebDriverWait(context.driver, 10)
 

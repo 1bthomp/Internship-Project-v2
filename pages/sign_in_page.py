@@ -1,4 +1,6 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from pages.base_page import Page
 from time import sleep
 
@@ -17,9 +19,10 @@ class sign_in_page(Page):
         self.input_text(*self.search_bar_2, text="@qqD9Kfkpymn5Fb")
 
     def click_continue(self):
-        sleep(2)
+        implicit_wait = WebDriverWait(self.driver, 10)
         self.wait_until_clickable_click(*self.continue_button)
 
     def click_settings(self):
-        sleep(2)
-        self.wait_until_clickable_click(*self.settings)
+        # self.wait_until_clickable_click(*self.settings)
+        element = self.find_elements(*self.settings)
+        element[2].click()
