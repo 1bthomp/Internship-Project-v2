@@ -7,8 +7,8 @@ class sign_in_page(Page):
     # Search in user/password
     search_bar_1 = (By.ID, "email-2")
     search_bar_2 = (By.ID, "field")
-    continue_button = (By.LINK_TEXT, 'Continue')
-    settings = (By.LINK_TEXT, 'Settings')
+    continue_button = (By.XPATH, "//a[@href='#']")
+    settings = (By.XPATH, "//a[@href='/settings']")
 
     def send_username(self):
         self.input_text(*self.search_bar_1, text="Thompb155@gmail.com")
@@ -17,9 +17,9 @@ class sign_in_page(Page):
         self.input_text(*self.search_bar_2, text="@qqD9Kfkpymn5Fb")
 
     def click_continue(self):
-        self.click(*self.continue_button)
-        sleep(4)
+        sleep(2)
+        self.wait_until_clickable_click(*self.continue_button)
 
     def click_settings(self):
-        self.click(*self.settings)
-        sleep(4)
+        sleep(2)
+        self.wait_until_clickable_click(*self.settings)
