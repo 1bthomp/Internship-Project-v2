@@ -1,7 +1,7 @@
-# Created by q at 6/5/24
-  Feature: Sub and payment
+# Created by q at 6/26/24
+  Feature: Creating account
 
-  Scenario: User Can open Subscription & payments page
-    Given Open main page and login
-    When Click on settings, subscription and payment options
-    Then Verify subscription, back button, and upgrade plan
+  Scenario: User can create account with random info
+    Given Open the registration page or sign up page
+    When Enter some test information in the input fields
+    Then Verify information and create account

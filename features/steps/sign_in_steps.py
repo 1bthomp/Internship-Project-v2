@@ -1,35 +1,37 @@
 from time import sleep
 from behave import given, when, then
+from selenium.webdriver.support.ui import Select
 
-@given('Open main page and login')
+@given('Open the registration page or sign up page')
 def main_page(context):
-    context.driver.get('https://soft.reelly.io/sign-in')
+    context.driver.get('https://soft.reelly.io/sign-up')
     sleep(4)
-    # Navigate to the URL
-
-    #Search in user
+@when('Enter some test information in the input fields')
+def enter_info(context):
+    context.app.sign_in_page.send_first_last_name()
+    sleep(4)
+    context.app.sign_in_page.send_phone()
+    sleep(4)
     context.app.sign_in_page.send_username()
-    #search_bar_1.clear()
-    #search_bar_1.send_keys("Thompb155@gmail.com")
-
-    # Search password
+    sleep(4)
     context.app.sign_in_page.send_password()
-    #search_bar_2.clear()
-    #search_bar_2.send_keys("@qqD9Kfkpymn5Fb")
-
-    # Click login
-    context.app.sign_in_page.click_continue()
+    sleep(4)
+    context.app.sign_in_page.send_website()
+    sleep(4)
+    context.app.sign_in_page.scroll_down_window()
+    sleep(4)
+    context.app.sign_in_page.send_dropdown()
+    sleep(4)
+    context.app.sign_in_page.send_dropdown_2()
+    sleep(4)
+    context.app.sign_in_page.select_dropdown_3()
+    sleep(4)
+    context.app.sign_in_page.select_dropdown_4()
     sleep(4)
 
-@when('Click on settings, subscription and payment options')
-def settings_subs_payment(context):
-    #Click settings (uncomment if needed)
-    context.app.sign_in_page.click_settings()
-    sleep(4)
-
-@then('Verify subscription, back button, and upgrade plan')
+@then('Verify information and create account')
 def verification(context):
-    #Click subscription
-    context.app.verify_page.click_subscription_button()
-    context.app.verify_page.verify_back_button()
-    context.app.verify_page.verify_upgrade()
+    #context.app.verify_page.verify_account()
+    #Click create account
+    context.app.verify_page.create_account()
+    sleep(4)

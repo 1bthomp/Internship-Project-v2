@@ -1,3 +1,5 @@
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -74,3 +76,6 @@ class Page:
 
     def scroll_down(self):
         self.driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
+
+    def select_by_visible_value(self, value):
+        self.driver.find_element(By.XPATH, value).click()
